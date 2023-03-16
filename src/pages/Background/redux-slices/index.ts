@@ -12,6 +12,7 @@ import signing from './signing';
 import { allAliases } from './utils';
 import { persistReducer, createTransform } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const rootReducer = combineReducers({
   account,
@@ -59,7 +60,7 @@ const CustomJSONTransform = createTransform(
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
   transforms: [CustomJSONTransform],
 };
 
