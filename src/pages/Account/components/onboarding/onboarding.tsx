@@ -12,7 +12,11 @@ import { ZkConnect, ZkConnectClientConfig, ZkConnectResponse } from "@sismo-core
 
 const zkConnectConfig: ZkConnectClientConfig = {
   // you will need to register an appId in the Factory
-  appId: "0xc80efc569984bdcf3bb6cbd00c6cae97", 
+  appId: "0xc80efc569984bdcf3bb6cbd00c6cae97",
+  devMode: {
+    enabled: true
+  }, 
+  vaultAppBaseUrl: "chrome-extension://khdbbdjjghoinfjjiobldgppdemjkomi"
 }
 
 // create a new ZkConnect instance with the client configuration
