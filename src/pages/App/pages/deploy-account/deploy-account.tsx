@@ -118,6 +118,8 @@ const DeployAccount = () => {
       });
 
       console.log(accounts, txHash);
+      setDeployLoader(false);
+      // navigate back to app.html
     }
 
     // await backgroundDispatch(sendTransaction(activeAccount));
