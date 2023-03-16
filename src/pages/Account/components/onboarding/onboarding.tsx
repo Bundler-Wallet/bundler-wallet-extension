@@ -6,28 +6,47 @@ import {
   Typography,
 } from '@mui/material';
 import { Stack } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { OnboardingComponent, OnboardingComponentProps } from '../types';
+import { ZkConnect, ZkConnectClientConfig, ZkConnectResponse } from "@sismo-core/zk-connect-client";
+
+const zkConnectConfig: ZkConnectClientConfig = {
+  // you will need to register an appId in the Factory
+  appId: "0xc80efc569984bdcf3bb6cbd00c6cae97", 
+}
+
+// create a new ZkConnect instance with the client configuration
+const zkConnect = ZkConnect(zkConnectConfig);
 
 const Onboarding: OnboardingComponent = ({
   onOnboardingComplete,
 }: OnboardingComponentProps) => {
+
+  const [zkConnectResponse, setZkConnectResponse] =
+    useState<ZkConnectResponse | null>(null);
+
+  useEffect(() => {
+    const zkConnectResponse = zkConnect.getResponse();
+    console.log(zkConnectResponse);
+    if (zkConnectResponse) {
+      setZkConnectResponse(zkConnectResponse);
+    }
+  }, []);
+
+  const requestProof = async () => {
+    // The `request` function sends your user to the Sismo Data Vault App 
+    // to generate the proof of Data Vault ownerhsip.
+    zkConnect.request();
+  }
+
   return (
     <Box sx={{ padding: 2 }}>
       <CardContent>
         <Typography variant="h3" gutterBottom>
-          Custmisable Account Component
+          Welcome to Smart Wallet
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          You can show as many steps as you want in this dummy component. You
-          need to call the function <b>onOnboardingComplete</b> passed as a
-          props to this component. <br />
-          <br />
-          The function takes a context as a parameter, this context will be
-          passed to your AccountApi when creating a new account.
-          <br />
-          This Component is defined in exported in{' '}
-          <pre>trampoline/src/pages/Account/components/onboarding/index.ts</pre>
+          Requesting ZK Proof
         </Typography>
       </CardContent>
       <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
@@ -35,9 +54,9 @@ const Onboarding: OnboardingComponent = ({
           <Button
             size="large"
             variant="contained"
-            onClick={() => onOnboardingComplete()}
+            onClick={() => requestProof()}
           >
-            Continue
+            Generate Proof
           </Button>
         </Stack>
       </CardActions>
