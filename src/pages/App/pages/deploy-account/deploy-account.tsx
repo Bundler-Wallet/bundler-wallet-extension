@@ -134,9 +134,9 @@ const DeployAccount = () => {
   }, [backgroundDispatch, activeAccount]);
 
   return (
-    <Container sx={{ width: '62vw', height: '100vh',background:'#171717' }}>
+    <Container sx={{ width: '62vw', height: '100vh' }}>
       <Header />
-      <Card sx={{ ml: 4, mr: 4, mt: 2, mb: 2 }}>
+      <Card sx={{ ml: 4, mr: 4, mt: 2, mb: 2, background:'#171717', color:'white', borderRadius: 5,}}>
         <Box sx={{ p: 2 }}>
           <Typography textAlign="center" variant="h6">
             Account not deployed
@@ -150,7 +150,7 @@ const DeployAccount = () => {
           <Typography variant="h6">Perform the following steps:</Typography>
           <Stepper activeStep={isButtonDisabled ? 0 : 1} orientation="vertical">
             <Step key={0}>
-              <StepLabel optional={null}>Get Funds</StepLabel>
+              <StepLabel sx={{ color:'white'}} optional={null}>Get Funds</StepLabel>
               <StepContent>
                 <Box sx={{ mb: 2 }}>
                   <Button
@@ -178,7 +178,8 @@ const DeployAccount = () => {
               </StepContent>
             </Step>
             <Step key={1}>
-              <StepLabel optional={null}>Initiate Deploy Transaction</StepLabel>
+              <StepLabel color='white' optional={null}>Initiate Deploy Transaction</StepLabel>
+            
               <StepContent>
                 <Typography>
                   Initiate the deployment transaction, it may take some time for

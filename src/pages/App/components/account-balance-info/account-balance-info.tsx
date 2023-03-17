@@ -46,7 +46,7 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
           <Typography variant="h3">
             {
               accountData.balances[activeNetwork.baseAsset.symbol].assetAmount
-                .amount
+                .amount.slice(0, 7)
             }{' '}
             {activeNetwork.baseAsset.symbol}
           </Typography>
