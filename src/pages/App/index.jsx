@@ -8,7 +8,8 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const store = new Store();
 
@@ -19,6 +20,23 @@ Object.assign(store, {
 });
 
 const container = document.getElementById('app-container');
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#757ce8"
+    },
+    action: {
+      disabledBackground:'grey',
+      disabled:'white',
+  
+    },
+    root: {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'white', // Change outline color
+      },
+    }
+  }
+});
 
 store
   .ready()
@@ -27,9 +45,11 @@ store
       const root = createRoot(container); // createRoot(container!) if you use TypeScript
       root.render(
         <Provider store={store}>
-          <HashRouter>
-            <App />
-          </HashRouter>
+          <ThemeProvider theme={theme}>
+            <HashRouter>
+              <App />
+            </HashRouter>
+          </ThemeProvider>
         </Provider>
       );
     }

@@ -11,6 +11,7 @@ import {
 import { getAccountEVMData } from '../../../Background/redux-slices/selectors/accountSelectors';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ethLogo from '../../../../assets/img/ethPortoLogo.png'
 
 const AccountBalanceInfo = ({ address }: { address: string }) => {
   const navigate = useNavigate();
@@ -34,8 +35,8 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
     <Stack spacing={1} justifyContent="center" alignItems="center">
       {activeNetwork.baseAsset.image && (
         <img
-          height={40}
-          src={activeNetwork.baseAsset.image}
+          height={50}
+          src={ethLogo}
           alt={`${activeNetwork.baseAsset.name} asset logo`}
         />
       )}

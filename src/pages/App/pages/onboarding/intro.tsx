@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import logo from '../../../../assets/img/logo.svg';
+import logo from '../../../../assets/img/icon-34.png';
 import { useNavigate } from 'react-router-dom';
 
 const Intro = () => {
@@ -30,16 +30,21 @@ const Intro = () => {
         sx={{
           width: 600,
           p: 2,
-          border: '1px solid #d6d9dc',
+
           borderRadius: 5,
-          background: 'white',
+          background: '#171717',
         }}
       >
         <CardContent>
-          <Typography textAlign="center" variant="h3" gutterBottom>
-            Start your eth journey
+          <Typography
+            textAlign="center"
+            variant="h3"
+            gutterBottom
+            sx={{ fontWeight:'bold' }}
+          >
+            Create your Ethereum Wallet
           </Typography>
-          <Typography textAlign="center" variant="body1" color="text.secondary">
+          <Typography textAlign="center" variant="body1" color="white">
             Your smart contract account with unlimited possibilities,{' '}
             <Link>learn more</Link>
           </Typography>
@@ -54,10 +59,10 @@ const Intro = () => {
           <Typography
             textAlign="center"
             sx={{ fontSize: 14 }}
-            color="text.secondary"
+            color="white"
             gutterBottom
           >
-            Ethereum Foundation
+            Made by Ylian, Silvan, and Cesar
           </Typography>
         </CardContent>
         <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
@@ -67,7 +72,7 @@ const Intro = () => {
               variant="contained"
               onClick={() => navigate('/accounts/new')}
             >
-              Create/recover new account
+              Create a Wallet
             </Button>
           </Stack>
         </CardActions>

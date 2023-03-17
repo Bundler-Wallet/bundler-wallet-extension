@@ -15,7 +15,7 @@ import {
   ZkConnectResponse,
 } from '@sismo-core/zk-connect-client';
 
-const zkConnectConfig: ZkConnectClientConfig = {
+{/* const zkConnectConfig: ZkConnectClientConfig = {
   // you will need to register an appId in the Factory
   appId: '0xc80efc569984bdcf3bb6cbd00c6cae97',
   devMode: {
@@ -64,6 +64,7 @@ const Onboarding: OnboardingComponent = ({
       </CardActions>
     </Box>
   );
-};
+}; 
 
 export default Onboarding;
+*/}

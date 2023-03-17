@@ -129,7 +129,7 @@ const DeployAccount = () => {
   }, [backgroundDispatch, activeAccount]);
 
   return (
-    <Container sx={{ width: '62vw', height: '100vh' }}>
+    <Container sx={{ width: '62vw', height: '100vh',background:'#171717' }}>
       <Header />
       <Card sx={{ ml: 4, mr: 4, mt: 2, mb: 2 }}>
         <Box sx={{ p: 2 }}>
@@ -141,7 +141,7 @@ const DeployAccount = () => {
           <AccountInfo showOptions={false} address={activeAccount} />
         )}
         {activeAccount && <AccountBalanceInfo address={activeAccount} />}
-        <Box sx={{ m: 4 }}>
+        <Box sx={{ m: 4, borderRadius: 5}}>
           <Typography variant="h6">Perform the following steps:</Typography>
           <Stepper activeStep={isButtonDisabled ? 0 : 1} orientation="vertical">
             <Step key={0}>

@@ -19,9 +19,9 @@ const Home = () => {
   const activeAccount = useBackgroundSelector(getActiveAccount);
 
   return (
-    <Container sx={{ width: '62vw', height: '100vh' }}>
+    <Container sx={{ width: '80vw', height: '100vh' }}>
       <Header />
-      <Card sx={{ ml: 4, mr: 4, mt: 2, mb: 2 }}>
+      <Card sx={{ ml: 4, mr: 4, mt: 2, mb: 2, background:'#171717', color:'white',borderRadius: 5,}}>
         <CardContent>
           {activeAccount && <AccountInfo address={activeAccount}></AccountInfo>}
           <Box

@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import logo from '../../../../assets/img/logo.svg';
+import logo from '../../../../assets/img/logo.png';
 import {
   getActiveNetwork,
   getSupportedNetworks,
@@ -47,7 +47,7 @@ const Header = () => {
         onClick={() => navigate('/')}
       >
         <img height={30} src={logo} className="App-logo" alt="logo" />
-        <Typography variant="h6">TRAMPOLINE</Typography>
+        <Typography variant="h6">Bundler.fi</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -55,7 +55,7 @@ const Header = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <FormControl sx={{ minWidth: 80 }}>
+        <FormControl sx={{ minWidth: 80,color:'white' }}>
           <InputLabel id="chain-selector">Chain</InputLabel>
           <Select
             labelId="chain-selector"
@@ -71,7 +71,6 @@ const Header = () => {
             ))}
           </Select>
         </FormControl>
-        <SettingsIcon fontSize="large" />
       </Stack>
     </Box>
   );
