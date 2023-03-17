@@ -25,18 +25,17 @@ import AccountBalanceInfo from '../../components/account-balance-info';
 import AccountInfo from '../../components/account-info';
 import Header from '../../components/header';
 import { useState } from 'react';
-import { BigNumber, ethers } from 'ethers';
+import { BigNumber, ethers, utils } from 'ethers';
 import { useProvider } from 'wagmi';
 import { useEffect } from 'react';
-import {
-  sendTransaction,
-  sendTransactionsRequest,
-} from '../../../Background/redux-slices/transactions';
 import { useNavigate } from 'react-router-dom';
+import Config from '../../../../exconfig.json';
+
 
 const DeployAccount = () => {
   const navigate = useNavigate();
   const [deployLoader, setDeployLoader] = useState<boolean>(false);
+  const [requestLoader, setRequestLoader] = useState<boolean>(false);
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
   const activeAccount = useBackgroundSelector(getActiveAccount);
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
@@ -57,7 +56,6 @@ const DeployAccount = () => {
     const fetchMinimumRequiredFundsPrice = async () => {
       if (accountData !== 'loading') {
         const gasPrice = await provider.getGasPrice();
-
         setMinimumRequiredFundsPrice(
           ethers.utils
             .parseEther(accountData.minimumRequiredFunds)
@@ -92,12 +90,19 @@ const DeployAccount = () => {
     return () => clearInterval(timer);
   }, [activeAccount, backgroundDispatch, isButtonDisabled]);
 
-  const copyAddress = useCallback(async () => {
-    await navigator.clipboard.writeText(activeAccount || '');
-    setTooltipMessage('Address copied');
-    setTimeout(() => {
-      setTooltipMessage('Copy address');
-    }, 6000);
+  const getFunds = useCallback(async () => {
+    if(activeAccount) {
+      setRequestLoader(true);
+      console.log(minimumRequiredFundsPrice)
+      const wallet = new ethers.Wallet("fa063c28a7a581277ccecd5ab4d6feaab01e777b42bb0966b3211cd7f70d6406", provider);
+      const tx = {
+        to: activeAccount || '0x0',
+        value: minimumRequiredFundsPrice.add(ethers.utils.parseEther('0.07')),
+      }
+      
+      const { hash } = await wallet.sendTransaction(tx);
+      console.log(hash)
+    }
   }, [activeAccount]);
 
   const deployAcount = useCallback(async () => {
@@ -145,26 +150,30 @@ const DeployAccount = () => {
           <Typography variant="h6">Perform the following steps:</Typography>
           <Stepper activeStep={isButtonDisabled ? 0 : 1} orientation="vertical">
             <Step key={0}>
-              <StepLabel optional={null}>Transfer Funds</StepLabel>
+              <StepLabel optional={null}>Get Funds</StepLabel>
               <StepContent>
-                <Typography>
-                  Transfer more than{' '}
-                  <Typography component={'span'}>
-                    {ethers.utils.formatEther(minimumRequiredFundsPrice)}{' '}
-                    {activeNetwork.baseAsset.symbol}
-                  </Typography>{' '}
-                  to the account
-                </Typography>
                 <Box sx={{ mb: 2 }}>
-                  <Tooltip title={tooltipMessage} enterDelay={0}>
-                    <Button
-                      onClick={copyAddress}
-                      variant="contained"
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      Copy address
-                    </Button>
-                  </Tooltip>
+                  <Button
+                    disabled={requestLoader}
+                    onClick={getFunds}
+                    variant="contained"
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Request {ethers.utils.formatEther(minimumRequiredFundsPrice.add(ethers.utils.parseEther('0.07')))}{' '}
+                  {activeNetwork.baseAsset.symbol}
+                  {requestLoader && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          marginTop: '-12px',
+                          marginLeft: '-12px',
+                        }}
+                      />
+                    )}
+                  </Button>
                 </Box>
               </StepContent>
             </Step>
@@ -177,7 +186,7 @@ const DeployAccount = () => {
                 </Typography>
                 <Box sx={{ mb: 2 }}>
                   <Button
-                    disabled={deployLoader}
+                    disabled={deployLoader || !activeAccount}
                     onClick={deployAcount}
                     variant="contained"
                     sx={{ mt: 1, mr: 1, position: 'relative' }}
