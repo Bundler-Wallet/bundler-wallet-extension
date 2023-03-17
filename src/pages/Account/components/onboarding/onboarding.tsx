@@ -9,6 +9,7 @@ import { Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { OnboardingComponent, OnboardingComponentProps } from '../types';
 import {
+  DataRequest,
   ZkConnect,
   ZkConnectClientConfig,
   ZkConnectResponse,
@@ -42,7 +43,9 @@ const Onboarding: OnboardingComponent = ({
   const requestProof = async () => {
     // The `request` function sends your user to the Sismo Data Vault App
     // to generate the proof of Data Vault ownerhsip.
-    zkConnect.request();
+    zkConnect.request({
+      callbackPath: "chrome-extension://khdbbdjjghoinfjjiobldgppdemjkomi/app.html"
+    });
   };
 
   return (
@@ -62,7 +65,7 @@ const Onboarding: OnboardingComponent = ({
             variant="contained"
             onClick={() => onOnboardingComplete()}
           >
-            Generate Proof
+            Connect GitHub Account
           </Button>
         </Stack>
       </CardActions>

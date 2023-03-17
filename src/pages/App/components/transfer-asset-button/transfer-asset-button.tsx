@@ -1,12 +1,15 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import StoreIcon from '@mui/icons-material/Store';
-import { Avatar, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { Avatar, Input, Stack, TextField, Tooltip, Typography, useTheme } from '@mui/material';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { ethers } from 'ethers';
 
 const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
   const theme = useTheme();
+
+  const [amt, setAmt] = useState<string>('0.0');
+  const [to, setTo] = useState<string>('0.0');
 
   const sendMoney = useCallback(async () => {
     console.log('did we come here?', window.ethereum);
@@ -19,8 +22,9 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
         params: [
           {
             from: activeAccount,
-            to: ethers.constants.AddressZero,
+            to: "0x7d6703218ab83D5255e4532101deB294eA1b9d27",
             data: '0x',
+            value: ethers.utils.parseEther('0.01'),
           },
         ],
       });
@@ -30,19 +34,14 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      <Tooltip title="Coming soon">
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          spacing={'4px'}
-          sx={{ cursor: 'not-allowed', opacity: 0.5 }}
-        >
-          <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
-            <StoreIcon />
-          </Avatar>
-          <Typography variant="button">Buy</Typography>
-        </Stack>
-      </Tooltip>
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        spacing={'4px'}
+        sx={{ cursor: 'not-allowed', opacity: 0.5 }}
+      >
+        <Input value={to} placeholder='To' />
+      </Stack>
       <Stack
         justifyContent="center"
         alignItems="center"

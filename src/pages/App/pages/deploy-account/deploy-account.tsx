@@ -32,8 +32,10 @@ import {
   sendTransaction,
   sendTransactionsRequest,
 } from '../../../Background/redux-slices/transactions';
+import { useNavigate } from 'react-router-dom';
 
 const DeployAccount = () => {
+  const navigate = useNavigate();
   const [deployLoader, setDeployLoader] = useState<boolean>(false);
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
   const activeAccount = useBackgroundSelector(getActiveAccount);
@@ -120,6 +122,7 @@ const DeployAccount = () => {
       console.log(accounts, txHash);
       setDeployLoader(false);
       // navigate back to app.html
+      navigate('/');
     }
 
     // await backgroundDispatch(sendTransaction(activeAccount));
