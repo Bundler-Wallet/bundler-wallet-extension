@@ -17,6 +17,7 @@ import {
 import { useBackgroundSelector } from '../../hooks';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
+import '../../index.css'
 
 const Header = () => {
   const navigate = useNavigate();
@@ -46,8 +47,8 @@ const Header = () => {
         sx={{ cursor: 'pointer' }}
         onClick={() => navigate('/')}
       >
-        <img height={30} src={logo} className="App-logo" alt="logo" />
-        <Typography variant="h6">Bundler.fi</Typography>
+        <img height={40} src={logo} className="App-logo" alt="logo" />
+        <h6 className='comfortaa'>Bundler.fi</h6>
       </Stack>
       <Stack
         direction="row"

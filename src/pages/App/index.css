@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 *,
 *::before,
@@ -46,4 +47,8 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+.comfortaa {
+  font-family: 'Comfortaa', cursive;
+  font-size: 24px;
 }
