@@ -18,5 +18,9 @@
   },
   "include": ["src", "deploy"],
   "exclude": ["build", "node_modules", "dist"],
-  "files": ["./hardhat.config.ts"]
+  "files": ["./hardhat.config.ts"],
+  "typeRoots": [
+    "../node_modules/@types",
+    "../@types"
+]
 }

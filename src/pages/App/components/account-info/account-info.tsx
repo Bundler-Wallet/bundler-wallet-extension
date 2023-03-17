@@ -31,8 +31,9 @@ const AccountInfo = ({
       justifyContent="center"
       alignItems="center"
       sx={{
-        borderBottom: '1px solid rgba(0, 0, 0, 0.20)',
+        borderBottom: '1px solid rgba(256, 256, 256, 0.5)',
         position: 'relative',
+       
       }}
     >
       <Box
@@ -55,9 +56,7 @@ const AccountInfo = ({
               minWidth: 300,
               borderRadius: 4,
               cursor: 'pointer',
-              '&:hover': {
-                background: '#f2f4f6',
-              },
+              
             }}
           >
             <Typography variant="h6">{accountInfo.name}</Typography>

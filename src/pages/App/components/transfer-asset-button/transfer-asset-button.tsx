@@ -38,9 +38,8 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
         justifyContent="center"
         alignItems="center"
         spacing={'4px'}
-        sx={{ cursor: 'not-allowed', opacity: 0.5 }}
       >
-        <Input value={to} placeholder='To' />
+        <Input value={to} placeholder='To' sx={{ color:'white' }}/>
       </Stack>
       <Stack
         justifyContent="center"
@@ -61,7 +60,7 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
           justifyContent="center"
           alignItems="center"
           spacing={'4px'}
-          sx={{ cursor: 'not-allowed', opacity: 0.5 }}
+          sx={{ cursor: 'not-allowed', opacity: 0.8 }}
         >
           <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
             <SwapHorizIcon />

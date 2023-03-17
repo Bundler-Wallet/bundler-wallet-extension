@@ -14,6 +14,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+
 import {
   ActiveAccountImplementation,
   AccountImplementations,
@@ -40,15 +41,15 @@ const TakeNameComponent = ({
 }) => {
   return (
     <>
-      <CardContent>
-        <Typography textAlign="center" variant="h3" gutterBottom>
+        <CardContent sx={{ color: 'white' }} >
+        <Typography textAlign="center" variant="h3" gutterBottom color="white" sx={{ fontWeight:'bold' }}>
           New account
         </Typography>
-        <Typography textAlign="center" variant="body1" color="text.secondary">
+        <Typography textAlign="center" variant="body1" color="white">
           Give a name to your account so that you can recoganise it easily.
         </Typography>
         <FormGroup sx={{ p: 2, pt: 4 }}>
-          <FormControl sx={{ m: 1 }} variant="outlined">
+          <FormControl sx={{ m: 1,color: 'black' }} >
             <InputLabel htmlFor="name">Name</InputLabel>
             <OutlinedInput
               value={name}
@@ -57,6 +58,8 @@ const TakeNameComponent = ({
               id="name"
               type="text"
               label="Name"
+              sx={{ color: '#757ce8',background:'white' }
+             }
             />
           </FormControl>
         </FormGroup>
@@ -65,13 +68,14 @@ const TakeNameComponent = ({
         <Stack spacing={2} sx={{ width: '100%', pl: 2, pr: 2 }}>
           <Box sx={{ position: 'relative' }}>
             <Button
-              sx={{ width: '100%' }}
+              sx={{ width: '100%', color: 'main' }}
               disabled={name.length === 0 || showLoader}
               size="large"
               variant="contained"
               onClick={nextStage}
+
             >
-              Set name
+              Set account
             </Button>
             {showLoader && (
               <CircularProgress
@@ -159,8 +163,7 @@ const NewAccount = () => {
             width: 600,
             minHeight: 300,
             p: 2,
-            border: '1px solid #d6d9dc',
-            background: 'white',
+            background: '#171717',
             borderRadius: 5,
           }}
         >
