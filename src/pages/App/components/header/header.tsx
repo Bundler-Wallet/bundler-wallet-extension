@@ -56,8 +56,16 @@ const Header = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <FormControl sx={{ minWidth: 80,color:'white' }}>
-          <InputLabel id="chain-selector">Chain</InputLabel>
+        <FormControl
+          sx={{
+            minWidth: 80,
+            color: 'white',
+            background: 'white',
+            padding: '0.25rem',
+            borderRadius: '0.75rem',
+          }}
+        >
+          {/* <InputLabel id="chain-selector">Chain</InputLabel> */}
           <Select
             labelId="chain-selector"
             id="chain-selector"
