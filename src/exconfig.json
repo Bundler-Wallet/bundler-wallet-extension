@@ -6,7 +6,7 @@
     "chainID": "5",
     "family": "EVM",
     "name": "Goerli",
-    "provider": "https://goerli.infura.io/v3/bdabe9d2f9244005af0f566398e648da",
+    "provider": "https://goerli.infura.io/v3/434d6c9b12bb4e57b9f657f3ade78ab8",
     "entryPointAddress": "0x0576a174D229E3cFA37253523E645A78A0C91B57",
     "bundler": "https://node.stackup.sh/v1/rpc/3d752829f173d63d162934ad8df8fa063cc188ea116f07fb09b3069f068e20e6",
     "baseAsset": {
