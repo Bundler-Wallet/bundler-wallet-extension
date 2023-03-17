@@ -50,7 +50,7 @@ const Transaction = ({
     // The `request` function sends your user to the Sismo Data Vault App
     // to generate the proof of Data Vault ownerhsip.
     zkConnect.request({
-      callbackPath: "chrome-extension://khdbbdjjghoinfjjiobldgppdemjkomi/popup.html"
+      callbackPath: window.location.origin + '/popup.html'
     });
   };  
 
