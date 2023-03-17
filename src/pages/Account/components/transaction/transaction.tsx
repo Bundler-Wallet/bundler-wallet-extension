@@ -8,43 +8,82 @@ import {
 import React from 'react';
 import { EthersTransactionRequest } from '../../../Background/services/provider-bridge';
 import { TransactionComponentProps } from '../types';
+import {
+  DataRequest,
+  ZkConnect,
+  ZkConnectClientConfig,
+  ZkConnectResponse,
+} from '@sismo-core/zk-connect-client';
+
+const zkConnectConfig: ZkConnectClientConfig = {
+  // you will need to register an appId in the Factory
+  appId: '0xc80efc569984bdcf3bb6cbd00c6cae97',
+  devMode: {
+    enabled: true,
+  },
+};
+
+// create a new ZkConnect instance with the client configuration
+const zkConnect = ZkConnect(zkConnectConfig);
+
 
 const Transaction = ({
   transaction,
   onComplete,
   onReject,
 }: TransactionComponentProps) => {
+
+  console.log(transaction)
+  const [zkConnectResponse, setZkConnectResponse] =
+    React.useState<ZkConnectResponse | null>(null);
+
+  React.useEffect(() => {
+    const zkConnectResponse = zkConnect.getResponse();
+    console.log("zkConnectResponse", zkConnectResponse);
+    if (zkConnectResponse) {
+
+      setZkConnectResponse(zkConnectResponse);
+    }
+  }, []);
+
+  const requestProof = async () => {
+    // The `request` function sends your user to the Sismo Data Vault App
+    // to generate the proof of Data Vault ownerhsip.
+    zkConnect.request({
+      callbackPath: "chrome-extension://khdbbdjjghoinfjjiobldgppdemjkomi/popup.html"
+    });
+  };  
+
   return (
     <>
       <CardContent>
-        <Typography variant="h3" gutterBottom>
-          Dummy Account Component
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          You can show as many steps as you want in this dummy component. You
-          need to call the function <b>onComplete</b> passed as a props to this
-          component. <br />
-          <br />
-          The function takes a modifiedTransactions & context as a parameter,
-          the context will be passed to your AccountApi when creating a new
-          account. While modifiedTransactions will be agreed upon by the user.
-          <br />
-          This Component is defined in exported in{' '}
-          <pre>
-            trampoline/src/pages/Account/components/transaction/index.ts
-          </pre>
+        <Typography textAlign='center' variant="h4" gutterBottom>
+          Prove yourself
         </Typography>
       </CardContent>
-      <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
-        <Stack spacing={2} sx={{ width: '100%' }}>
-          <Button
-            size="large"
-            variant="contained"
-            onClick={() => onComplete(transaction, undefined)}
-          >
-            Continue
-          </Button>
-        </Stack>
+      <CardActions sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '90%' }}>
+        {
+          zkConnectResponse ? 
+          <Stack spacing={2} sx={{ width: '80%' }}>
+            <Button
+              size="large"
+              variant="contained"
+              onClick={() => onComplete(transaction, undefined)}
+            >
+              Continue
+            </Button>
+          </Stack>
+          : 
+          <Stack spacing={2} sx={{ width: '80%' }}>
+            <Button
+              size="large"
+              variant="contained"
+              onClick={() => requestProof()}
+            >
+              zkConnect
+            </Button>
+          </Stack>
+        }
       </CardActions>
     </>
   );

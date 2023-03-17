@@ -6,7 +6,7 @@ import {
   Container,
   Typography,
 } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { getActiveAccount } from '../../../Background/redux-slices/selectors/accountSelectors';
 import AccountActivity from '../../components/account-activity';
 import AccountBalanceInfo from '../../components/account-balance-info';
@@ -46,9 +46,6 @@ const Home = () => {
           </Box>
           <AccountActivity />
         </CardContent>
-        <CardActions sx={{ width: '100%', pl: 2, pr: 2, pt: 0 }}>
-          Card actions
-        </CardActions>
       </Card>
     </Container>
   );

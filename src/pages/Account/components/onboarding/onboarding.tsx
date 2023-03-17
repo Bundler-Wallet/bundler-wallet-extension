@@ -40,13 +40,6 @@ const Onboarding: OnboardingComponent = ({
     }
   }, []);
 
-  const requestProof = async () => {
-    // The `request` function sends your user to the Sismo Data Vault App
-    // to generate the proof of Data Vault ownerhsip.
-    zkConnect.request({
-      callbackPath: "chrome-extension://khdbbdjjghoinfjjiobldgppdemjkomi/app.html"
-    });
-  };
 
   return (
     <Box sx={{ padding: 2 }}>
