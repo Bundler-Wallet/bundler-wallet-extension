@@ -1,7 +1,15 @@
 import React, { useCallback, useState } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import StoreIcon from '@mui/icons-material/Store';
-import { Avatar, Input, Stack, TextField, Tooltip, Typography, useTheme } from '@mui/material';
+import {
+  Avatar,
+  Input,
+  Stack,
+  TextField,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { ethers } from 'ethers';
 
@@ -22,7 +30,7 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
         params: [
           {
             from: activeAccount,
-            to: "0x7d6703218ab83D5255e4532101deB294eA1b9d27",
+            to: '0x7d6703218ab83D5255e4532101deB294eA1b9d27',
             data: '0x',
             value: ethers.utils.parseEther('0.01'),
           },
@@ -34,13 +42,19 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      <Stack
-        justifyContent="center"
-        alignItems="center"
-        spacing={'4px'}
-      >
-        <Input value={to} placeholder='To' sx={{ color:'white' }}/>
-      </Stack>
+      <Tooltip title="Coming soon">
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          spacing={'4px'}
+          sx={{ cursor: 'not-allowed', opacity: 0.5 }}
+        >
+          <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
+            <StoreIcon />
+          </Avatar>
+          <Typography variant="button">Buy</Typography>
+        </Stack>
+      </Tooltip>
       <Stack
         justifyContent="center"
         alignItems="center"
