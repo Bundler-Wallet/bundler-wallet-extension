@@ -1,8 +1,13 @@
-# Trampoline Example
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="src/assets/img/icon-128.png">
+    <img src="src/assets/img/icon-128.png" height="300px">
+  </picture>
+</p>
 
-<img src="src/assets/img/icon-128.png" width="64"/>
+<h1 align="center">Bundler wallet</h1>
 
-Trampoline is a chrome extension boilerplate code to showcase your own Smart Contract Wallets with React 18 and Webpack 5 support.
+Privacy-enabled and Web2 Authenticated smart wallets for access to any Web3 dApp.
 
 ## Installation and Running
 
@@ -60,158 +65,6 @@ Trampoline is a chrome extension boilerplate code to showcase your own Smart Con
    d. Make sure your mnemonic & beneficiary are setup correctly.
 5. Run the bunder using `yarn bundler --unsafe --port 9000 --auto`
 
----
-
-## Extension Structure
-
-1. You can change the icons at `src/assets/img/icon-34.png` and `src/assets/img/icon-128.png` for the chrome extension.
-
-## Wallet Structure
-
-All your extension's account code must be placed in the `src/pages/Account` folder.
-
-There are two subfolders in `src/pages/Account`:
-
-- account-api
-- components
-
-### account-api folder
-
-This folder is used to define the `AccountAPI` of your specific account implementation. Every implementation must implement `AccountApiType`.
-
-```typescript
-export abstract class AccountApiType extends BaseAccountAPI {
-  abstract serialize: () => Promise<object>;
-
-  /** sign a message for the user */
-  abstract signMessage: (
-    request?: MessageSigningRequest,
-    context?: any
-  ) => Promise<string>;
-
-  abstract signUserOpWithContext(
-    userOp: UserOperationStruct,
-    context?: any
-  ): Promise<string>;
-}
-
-export declare abstract class BaseAccountAPI {
-  /**
-   * return the value to put into the "initCode" field, if the contract is not yet deployed.
-   * this value holds the "factory" address, followed by this account's information
-   */
-  abstract getAccountInitCode(): Promise<string>;
-  /**
-   * return current account's nonce.
-   */
-  abstract getNonce(): Promise<BigNumber>;
-  /**
-   * encode the call from entryPoint through our account to the target contract.
-   * @param target
-   * @param value
-   * @param data
-   */
-  abstract encodeExecute(
-    target: string,
-    value: BigNumberish,
-    data: string
-  ): Promise<string>;
-}
-```
-
-The boilerplate includes a SimpleAccount Implementation by Eth-Infinitism, which you can find [here](https://github.com/eth-infinitism/bundler/blob/main/packages/sdk/src/SimpleAccountAPI.ts).
-
-### components folder
-
-This folder is used to define the components that will be used in the Chrome extension. This folder should contain two subfolders.
-
-- onboarding
-- sign-message
-- transaction
-
-The `onboarding` folder defines the component that will be displayed to the user during the creation of a new wallet. You can display custom information or collect user inputs if needed.
-
-The signature of the `OnboardingComponent` is defined as follows.
-
-```typescript
-export interface OnboardingComponentProps {
-  onOnboardingComplete: (context?: any) => void;
-}
-
-export interface OnboardingComponent
-  extends React.FC<OnboardingComponentProps> {}
-```
-
-Once the component has collected enough information from the user, it should pass the collected information to `onOnboardingComplete` as the `context` parameter. This `context` will be passed on to your `account-api`
-
-The signature of the `account-api` is as follows, which shows how the `context` will be passed:
-
-```typescript
-export interface AccountApiParamsType extends BaseApiParams {
-  context?: any;
-}
-
-export type AccountImplementationType = new (
-  params: AccountApiParamsType
-) => AccountApiType;
-```
-
-The `sign-message` folder defines the component that will be displayed to the user whenever the dapp requests the user to sign any message, i.e. dapp calls `personal_sign` RPC method. You can display custom information or collect user inputs if needed.
-
-The signature of the `SignMessageComponenet` is defined as follows.
-
-```typescript
-export interface SignMessageComponenetProps {
-  onComplete: (context?: any) => Promise<void>;
-}
-
-export interface SignMessageComponenet
-  extends React.FC<SignMessageComponenetProps> {}
-```
-
-Once the component has collected enough information from the user, it should pass the collected information to `onComplete` as the `context` parameter. This `context` will be passed on to your `signMessage` function of `account-api`
-
-The signature of the `signMessage` is as follows, which shows how the `context` will be passed:
-
-```typescript
-  /** sign a message for the user */
-  abstract signMessage: (
-    request?: MessageSigningRequest,
-    context?: any
-  ) => Promise<string>;
-```
-
-The `transaction` folder defines the component that will be displayed to the user whenever the dapp requests to initiate a transaction, i.e. dapp calls `eth_sendTransaction` RPC method. You can display custom information or collect user inputs if needed.
-
-The signature of the `TransactionComponent` is defined as follows.
-
-```typescript
-export interface TransactionComponentProps {
-  transaction: EthersTransactionRequest;
-  onComplete: (
-    modifiedTransaction: EthersTransactionRequest,
-    context?: any
-  ) => Promise<void>;
-}
-
-export interface TransactionComponent
-  extends React.FC<TransactionComponentProps> {}
-```
-
-Once the component has collected enough information from the user, it should pass the collected information to `onComplete` as the `context` parameter. You can also modify the transaction if you want and return it also as a parameter of `onComplete` function. This `context` and `modifiedTransaction` will be passed on to your `createUnsignedUserOp` function of `account-api`
-
-The signature of the `createUnsignedUserOp` is as follows, which shows how the `context` will be passed:
-
-```typescript
-  /** sign a message for the user */
-  abstract createUnsignedUserOp: (
-    request?: MessageSigningRequest,
-    context?: any
-  ) => Promise<string>;
-```
-
-If you want you can also attach a paymaster here if your wallet wants to sponsor the transaction as well. The paymaster information will be displayed to the user.
-
 ## Config
 
 Config of the extension can be set in `excnfig.json` file.
@@ -240,24 +93,6 @@ Config of the extension can be set in `excnfig.json` file.
 }
 ```
 
-## FAQ
+## ...
 
-### Is the password screen mandatory?
-
-No you can disable that by setting `enablePasswordEncryption` flag to `false` in `exconfig.json`.
-
-> **Warning:** the local storage will be unencrypted and your wallet must return an encrypted state when `serialize` function of `account-api` willo be called or else the user's fund will be at risk.
-
-### Is the view transaction screen mandatory?
-
-If you want to show a custom screen then you must present it to the user in `TransactionComponent` and set `showTransactionConfirmationScreen` to `false`.
-
-### How do I, as a wallet provider attach a custom paymaster?
-
-You must return the paymaster information in the `userOp` constructed by the function `createUnsignedUserOp`.
-
-> **Warning:** If `showTransactionConfirmationScreen` has been disabled then the user will not be aware of paymaster and you must inform the user about paymaster in your custom transaction confirmation screen.
-
-## Webpack auto-reload and HRM Errors
-
-This repository is based on the boilerplate code found at [lxieyang/chrome-extension-boilerplate-react](https://github.com/lxieyang/chrome-extension-boilerplate-react). To understand how hot-reloading and content scripts work, refer to its README.
+This repository is based on the boilerplate code found at [plusminushalf/trampoline-example](https://github.com/plusminushalf/trampoline-example) go there for more details.
