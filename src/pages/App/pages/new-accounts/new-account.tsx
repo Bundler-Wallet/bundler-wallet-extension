@@ -53,7 +53,7 @@ const TakeNameComponent = ({
           New account
         </Typography>
         <Typography textAlign="center" variant="body1" color="white">
-          Give a name to your account so that you can recoganise it easily.
+          Give a name to your account so that you can recognise it easily.
         </Typography>
         <FormGroup sx={{ p: 2, pt: 4 }}>
           <FormControl sx={{ m: 1, color: 'black' }}>
@@ -65,7 +65,7 @@ const TakeNameComponent = ({
               placeholder="Name"
               sx={{
                 color: '#757ce8',
-                background: 'white',
+                background: 'transparent',
                 padding: '0.50rem',
                 borderRadius: '0.25rem',
               }}

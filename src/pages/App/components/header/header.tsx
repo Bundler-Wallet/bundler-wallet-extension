@@ -60,7 +60,7 @@ const Header = () => {
           sx={{
             minWidth: 80,
             color: 'white',
-            background: 'white',
+            background: 'transparent',
             padding: '0.25rem',
             borderRadius: '0.75rem',
           }}
@@ -69,6 +69,7 @@ const Header = () => {
           <Select
             labelId="chain-selector"
             id="chain-selector"
+            sx={{ color: 'white' }}
             value={activeNetwork.chainID}
             label="Chain"
             // onChange={handleChange}

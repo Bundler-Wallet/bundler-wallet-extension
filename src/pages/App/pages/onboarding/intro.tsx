@@ -42,11 +42,10 @@ const Intro = () => {
             gutterBottom
             sx={{ fontWeight:'bold' }}
           >
-            Create your Ethereum Wallet
+            Bundler Wallet
           </Typography>
           <Typography textAlign="center" variant="body1" color="white">
-            Your smart contract account with unlimited possibilities,{' '}
-            <Link>learn more</Link>
+            The smart wallet with web2 authentication for access to any dApp
           </Typography>
           <Box
             display="flex"
