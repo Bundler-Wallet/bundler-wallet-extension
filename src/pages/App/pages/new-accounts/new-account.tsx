@@ -8,6 +8,7 @@ import {
   Container,
   FormControl,
   FormGroup,
+  Input,
   InputLabel,
   Link,
   OutlinedInput,
@@ -41,25 +42,33 @@ const TakeNameComponent = ({
 }) => {
   return (
     <>
-        <CardContent sx={{ color: 'white' }} >
-        <Typography textAlign="center" variant="h3" gutterBottom color="white" sx={{ fontWeight:'bold' }}>
+      <CardContent sx={{ color: 'white' }}>
+        <Typography
+          textAlign="center"
+          variant="h3"
+          gutterBottom
+          color="white"
+          sx={{ fontWeight: 'bold' }}
+        >
           New account
         </Typography>
         <Typography textAlign="center" variant="body1" color="white">
           Give a name to your account so that you can recoganise it easily.
         </Typography>
         <FormGroup sx={{ p: 2, pt: 4 }}>
-          <FormControl sx={{ m: 1,color: 'black' }} >
-            <InputLabel htmlFor="name">Name</InputLabel>
-            <OutlinedInput
+          <FormControl sx={{ m: 1, color: 'black' }}>
+            <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              autoFocus
               id="name"
               type="text"
-              label="Name"
-              sx={{ color: '#757ce8',background:'white' }
-             }
+              placeholder="Name"
+              sx={{
+                color: '#757ce8',
+                background: 'white',
+                padding: '0.50rem',
+                borderRadius: '0.25rem',
+              }}
             />
           </FormControl>
         </FormGroup>
@@ -73,7 +82,6 @@ const TakeNameComponent = ({
               size="large"
               variant="contained"
               onClick={nextStage}
-
             >
               Set account
             </Button>
