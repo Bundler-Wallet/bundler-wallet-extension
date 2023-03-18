@@ -150,7 +150,7 @@ const DeployAccount = () => {
           <Typography variant="h6">Perform the following steps:</Typography>
           <Stepper activeStep={isButtonDisabled ? 0 : 1} orientation="vertical">
             <Step key={0}>
-              <StepLabel sx={{ color:'white'}} optional={null}>Get Funds</StepLabel>
+              <StepLabel  optional={null}><Typography sx={{ color:'white'}}>Get Funds</Typography></StepLabel>
               <StepContent>
                 <Box sx={{ mb: 2 }}>
                   <Button
@@ -178,7 +178,7 @@ const DeployAccount = () => {
               </StepContent>
             </Step>
             <Step key={1}>
-              <StepLabel color='white' optional={null}>Initiate Deploy Transaction</StepLabel>
+              <StepLabel color='white' optional={null}><Typography sx={{ color:'white'}}>Initiate Deploy Transaction</Typography></StepLabel>
             
               <StepContent>
                 <Typography>

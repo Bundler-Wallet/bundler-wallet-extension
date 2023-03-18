@@ -6,7 +6,6 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import { EthersTransactionRequest } from '../../../Background/services/provider-bridge';
 import { TransactionComponentProps } from '../types';
 import {
   DataRequest,
@@ -56,12 +55,7 @@ const Transaction = ({
 
   return (
     <>
-      <CardContent>
-        <Typography textAlign='center' variant="h4" gutterBottom>
-          Prove yourself
-        </Typography>
-      </CardContent>
-      <CardActions sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '90%' }}>
+      <CardActions sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '90%', flexGrow: 1, height: '100vh', overflow: 'hidden'}}>
         {
           zkConnectResponse ? 
           <Stack spacing={2} sx={{ width: '80%' }}>
@@ -70,7 +64,7 @@ const Transaction = ({
               variant="contained"
               onClick={() => onComplete(transaction, undefined)}
             >
-              Continue
+              Complete Transaction
             </Button>
           </Stack>
           : 
@@ -80,7 +74,7 @@ const Transaction = ({
               variant="contained"
               onClick={() => requestProof()}
             >
-              zkConnect
+              Prove ownership with Sismo
             </Button>
           </Stack>
         }
