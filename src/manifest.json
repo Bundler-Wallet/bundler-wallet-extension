@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Trampoline Example",
-  "description": "Trampoline is a chrome extension boilerplate code to showcase your own Smart Contract Wallets",
+  "name": "Bundler wallet",
+  "description": "The smart wallet giving web2 users access to any dApp",
   "options_page": "options.html",
   "background": { "service_worker": "ex_background.bundle.js" },
   "action": {
